@@ -10,12 +10,13 @@ import (
 func init() {
 	s := g.Server()
 	// 分组路由注册方式
-	s.Group("/", func(group *ghttp.RouterGroup) {
+	s.Group("/api", func(group *ghttp.RouterGroup) {
 		group.Middleware(
 			service.Middleware.Ctx,
 			service.Middleware.CORS,
 		)
-		group.ALL("/chat", api.Chat)
+		group.ALL("/captcha.html", api.Login)
+		group.ALL("/index/Login", api.Login)
 		group.ALL("/user", api.User)
 		group.Group("/", func(group *ghttp.RouterGroup) {
 			group.Middleware(service.Middleware.Auth)

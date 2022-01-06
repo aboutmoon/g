@@ -12,6 +12,12 @@ var Middleware = middlewareService{}
 type middlewareService struct{}
 
 // 自定义上下文对象
+func (s *middlewareService) Session(r *ghttp.Request) {
+	// 执行下一步请求逻辑
+	r.Middleware.Next()
+}
+
+// 自定义上下文对象
 func (s *middlewareService) Ctx(r *ghttp.Request) {
 	// 初始化，务必最开始执行
 	customCtx := &model.Context{
