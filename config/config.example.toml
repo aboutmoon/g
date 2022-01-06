@@ -20,7 +20,7 @@
 
 # Database configurations.
 [database]
-    link  = "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
+    link  = "mysql:root:vfYUozdrfWn%!JpA@tcp(gz-cdb-k5hoiw91.sql.tencentcdb.com:60787)/db_app_datacenter"
     debug = true
     # 数据库日志对象配置
     [database.logger]
@@ -32,6 +32,6 @@
 [gfcli]
     # 自定义DAO生成配置(默认是读取database配置)
     [[gfcli.gen.dao]]
-        link   = "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
-        tables = "user"
+        link   = "mysql:root:vfYUozdrfWn%!JpA@tcp(gz-cdb-k5hoiw91.sql.tencentcdb.com:60787)/db_app_datacenter"
+        tables = "t_app_monetize_ad,t_app_monetize_config,t_app_monetize_config_copy1,t_app_pkg_list,t_app_pkg_monetize_adparams,t_app_pkg_put_adparams,t_app_pkg_sdk_params,t_app_put_config,t_app_put_config_copy1,t_app_selection_config,t_apps,t_auth_rule,t_cash_data,t_dynamic_config,t_game_config_log,t_game_event,t_game_host,t_game_json,t_game_list,t_game_module,t_game_module_tree,t_game_module_tree_field,t_game_module_tree_table,t_game_module_tree_value,t_game_operate_config,t_game_version,t_module,t_module_tree,t_module_tree_field,t_module_tree_table,t_module_tree_value,t_operate_data,t_put_adparames,t_put_config,t_put_config1,t_put_config_copy1,t_user_apps,t_user_game_auth,t_user_log,t_users"
 
