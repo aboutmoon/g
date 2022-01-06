@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/gogf/gf-demos/app/model"
+	"github.com/aboutmoon/g/app/model"
 	"github.com/gogf/gf/net/ghttp"
 	"net/http"
 )

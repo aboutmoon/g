@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/gogf/gf-demos/app/model"
+	"github.com/aboutmoon/g/app/model"
 )
 
 // Session管理服务

@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/gogf/gf-demos/library/response"
+	"github.com/aboutmoon/g/library/response"
 	"github.com/gogf/gf/net/ghttp"
 )
 
