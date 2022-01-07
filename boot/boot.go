@@ -1,7 +1,7 @@
 package boot
 
 import (
-	_ "github.com/aboutmoon/g/packed"
+	_ "g/packed"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/swagger"

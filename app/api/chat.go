@@ -2,7 +2,7 @@ package api
 
 import (
 	"fmt"
-	"github.com/aboutmoon/g/app/model"
+	"g/app/model"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/util/gconv"
 

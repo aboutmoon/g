@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/aboutmoon/g/app/dao"
-	"github.com/aboutmoon/g/app/model"
+	"g/app/dao"
+	"g/app/model"
 )
 
 // 中间件管理服务

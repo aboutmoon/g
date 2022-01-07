@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/aboutmoon/g/app/model"
+	"g/app/model"
 )
 
 // Session管理服务

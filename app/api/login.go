@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/aboutmoon/g/library/response"
+	"g/library/response"
 	"github.com/gogf/gf/net/ghttp"
 )
 

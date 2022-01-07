@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/aboutmoon/g/app/model"
+	"g/app/model"
 	"github.com/gogf/gf/net/ghttp"
 )
 

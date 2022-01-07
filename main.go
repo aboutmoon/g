@@ -1,8 +1,8 @@
 package main
 
 import (
-	_ "github.com/aboutmoon/g/boot"
-	_ "github.com/aboutmoon/g/router"
+	_ "g/boot"
+	_ "g/router"
 	"github.com/gogf/gf/frame/g"
 )
 

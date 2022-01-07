@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/aboutmoon/g/app/model"
-	"github.com/aboutmoon/g/app/service"
-	"github.com/aboutmoon/g/library/response"
+	"g/app/model"
+	"g/app/service"
+	"g/library/response"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/util/gconv"
 )

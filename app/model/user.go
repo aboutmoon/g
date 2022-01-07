@@ -5,7 +5,7 @@
 package model
 
 import (
-	"github.com/aboutmoon/g/app/model/internal"
+	"g/app/model/internal"
 )
 
 // User is the golang structure for table user.

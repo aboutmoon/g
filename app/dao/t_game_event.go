@@ -5,7 +5,7 @@
 package dao
 
 import (
-	"github.com/aboutmoon/g/app/dao/internal"
+	"g/app/dao/internal"
 )
 
 // tGameEventDao is the manager for logic model data accessing and custom defined data operations functions management.

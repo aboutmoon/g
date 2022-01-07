@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/aboutmoon/g/app/api"
-	"github.com/aboutmoon/g/app/service"
+	"g/app/api"
+	"g/app/service"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 )
