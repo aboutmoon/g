@@ -41,3 +41,9 @@ type UserServiceSignUpReq struct {
 	Password string
 	Nickname string
 }
+
+type UserLoginReq struct {
+	Username string
+	Password string
+	Captcha  string
+}

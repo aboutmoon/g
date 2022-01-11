@@ -15,9 +15,9 @@ func init() {
 			service.Middleware.Ctx,
 			service.Middleware.CORS,
 		)
-		group.ALL("/captcha.html", api.Login)
+		group.ALL("/captcha.html", api.Captcha.Get)
 		group.ALL("/index/Login", api.Login)
-		group.ALL("/user", api.User)
+		//group.ALL("/user", api.User)
 		group.Group("/", func(group *ghttp.RouterGroup) {
 			group.Middleware(service.Middleware.Auth)
 			group.ALL("/user/profile", api.User.Profile)
