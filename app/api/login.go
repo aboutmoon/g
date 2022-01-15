@@ -2,6 +2,7 @@ package api
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"g/app/model"
 	"g/library/response"
@@ -37,16 +38,16 @@ func (a *loginApi) Login(r *ghttp.Request) {
 
 	id := fmt.Sprintf("%v", r.Session.Get("captcha"))
 
-	//url := "http://test-permission.zxmn2018.com"
-	//request := "/api/checklogin"
+	url := "http://test-permission.zxmn2018.com"
+	loginRequest := "/api/checklogin"
 
-	system_key := "app_gamesystem"
+	systemKey := "app_gamesystem"
 	secret := "c2711e4866767ae07061578655ccd51b"
 	paramMap := g.MapStrStr{
 		"user_name":  loginReq.Username,
 		"password":   loginReq.Password,
 		"ip":         r.GetClientIp(),
-		"system_key": system_key,
+		"system_key": systemKey,
 	}
 
 	paramArr := g.ArrayStr{}
@@ -67,8 +68,27 @@ func (a *loginApi) Login(r *ghttp.Request) {
 	fmt.Printf("%+v %s", paramMap, p)
 
 	if !captcha.VerifyString(id, loginReq.Captcha) {
-		response.JsonExit(r, 1, "验证码错误")
+		//response.JsonExit(r, 1, "验证码错误")
 	}
 
-	response.JsonExit(r, 1, "success", 1)
+	c, err := g.Client().Post(
+		url+loginRequest,
+		paramMap,
+	)
+	if err != nil {
+		response.JsonExit(r, 1, err.Error())
+	} else {
+		defer c.Close()
+	}
+
+	var res *model.PermissionRequestRes
+	err = json.Unmarshal(c.ReadAll(), &res)
+	if err != nil {
+		fmt.Println(err)
+		response.JsonExit(r, 1, err.Error())
+	}
+
+	fmt.Println("%v", res)
+
+	response.JsonExit(r, 1, "success", res.Data)
 }

@@ -11,5 +11,6 @@ import (
 // @description `GoFrame`基础开发框架示例服务API接口文档。
 // @schemes     http
 func main() {
+	println("main.go")
 	g.Server().Run()
 }

@@ -6,6 +6,7 @@ package model
 
 import (
 	"g/app/model/internal"
+	"github.com/gogf/gf/frame/g"
 )
 
 // User is the golang structure for table user.
@@ -46,4 +47,53 @@ type UserLoginReq struct {
 	Username string
 	Password string
 	Captcha  string
+}
+
+type Path struct {
+	Children      []Path `json:"children"`
+	ComponentPath string `json:"component_path"`
+	CreateTime    string `json:"create_time"`
+	FontFamily    string `json:"fontFamily"`
+	Href          string `json:"href"`
+	Icon          string `json:"icon"`
+	Id            string `json:"id"`
+	IsCheck       string `json:"isCheck"`
+	IsDeleted     string `json:"is_deleted"`
+	Pid           string `json:"pid"`
+	RouteHref     string `json:"route_href"`
+	RouteName     string `json:"route_name"`
+	RoutePath     string `json:"route_path"`
+	Sort          string `json:"sort"`
+	Spread        string `json:"spread"`
+	Status        string `json:"status"`
+	SystemId      string `json:"system_id"`
+	Title         string `json:"title"`
+	UpdateTime    string `json:"update_time"`
+}
+
+type PermissionRequestRes struct {
+	Code    int    `json:"code"`
+	Message string `json:"msg"`
+	Data    struct {
+		Groups g.ArrayInt `json:"data.groups"`
+		Menu   []Path     `json:"data.menu"`
+	} `json:"data"`
+	NodePermissions g.ArrayStr `json:"nodePermissions"`
+	Platforms       string     `json:"platforms"`
+	UserInfo        struct {
+		Email    string `json:"userInfo.email"`
+		Id       int    `json:"userInfo.id"`
+		Mobile   string `json:"userInfo.mobile"`
+		Password string `json:"userInfo.password"`
+		RealName string `json:"userInfo.real_name"`
+		Status   string `json:"userInfo.status"`
+		UserIcon string `json:"userInfo.user_icon"`
+		UserName string `json:"userInfo.user_name"`
+	} `json:"userInfo"`
+}
+
+type Test struct {
+	Code    int         `json:"code"`
+	Message string      `json:"msg"`
+	Data    interface{} `json:"data"`
 }

@@ -9,6 +9,7 @@ import (
 
 // 用于应用初始化。
 func init() {
+	println("boot.go init")
 	s := g.Server()
 	s.Plugin(&swagger.Swagger{})
 }
