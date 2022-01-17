@@ -90,5 +90,5 @@ func (a *loginApi) Login(r *ghttp.Request) {
 
 	fmt.Println("%v", res)
 
-	response.JsonExit(r, 1, "success", res.Data)
+	response.JsonExit(r, 1, "success", res)
 }
