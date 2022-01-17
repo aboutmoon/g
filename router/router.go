@@ -8,6 +8,7 @@ import (
 )
 
 func init() {
+	println("route.go init")
 	s := g.Server()
 	// 分组路由注册方式
 	s.Group("/api", func(group *ghttp.RouterGroup) {
