@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"g/app/model"
 	"github.com/gogf/gf/net/ghttp"
 	"net/http"
@@ -13,6 +14,16 @@ type middlewareService struct{}
 
 // 自定义上下文对象
 func (s *middlewareService) Session(r *ghttp.Request) {
+	cookieName := "SESSIONID"
+
+	token := fmt.Sprintf("%v", r.Get("token"))
+
+	if token == "" {
+		sessionId := r.Cookie.Get(cookieName)
+		println(sessionId)
+	} else {
+		sessionId := token
+	}
 	// 执行下一步请求逻辑
 	r.Middleware.Next()
 }

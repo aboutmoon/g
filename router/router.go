@@ -13,6 +13,7 @@ func init() {
 	// 分组路由注册方式
 	s.Group("/api", func(group *ghttp.RouterGroup) {
 		group.Middleware(
+			service.Middleware.Session,
 			service.Middleware.Ctx,
 			service.Middleware.CORS,
 		)

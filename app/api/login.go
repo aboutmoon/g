@@ -88,7 +88,15 @@ func (a *loginApi) Login(r *ghttp.Request) {
 		response.JsonExit(r, 1, err.Error())
 	}
 
-	fmt.Println("%v", res)
+	// todo: 读配置
+	_ = r.Session.Set("uid", res.Data.UserInfo.Id)
+	_ = r.Session.Set("username", res.Data.UserInfo.UserName)
+	_ = r.Session.Set("real_name", res.Data.UserInfo.UserName)
+	_ = r.Session.Set(systemKey+"menu", res.Data.Menu)
+	_ = r.Session.Set(systemKey+"nodePermissions", res.Data.NodePermissions)
+	_ = r.Session.Set(systemKey+"platforms", res.Data.Platforms)
+	_ = r.Session.Set(systemKey+"groups", res.Data.Groups)
+	res.Data.SessionId = r.GetSessionId()
 
-	response.JsonExit(r, 1, "success", res)
+	response.JsonExit(r, 1, "success", res.Data)
 }

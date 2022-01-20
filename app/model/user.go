@@ -75,21 +75,22 @@ type PermissionRequestRes struct {
 	Code    int    `json:"code"`
 	Message string `json:"msg"`
 	Data    struct {
-		Groups g.ArrayInt `json:"groups"`
-		Menu   []Path     `json:"menu"`
+		Groups    g.ArrayInt `json:"groups"`
+		Menu      []Path     `json:"menu"`
+		SessionId string     `json:"session_id"`
+		UserInfo  struct {
+			Email    string `json:"email"`
+			Id       int    `json:"id"`
+			Mobile   string `json:"mobile"`
+			Password string `json:"password"`
+			RealName string `json:"real_name"`
+			Status   int    `json:"status"`
+			UserIcon string `json:"user_icon"`
+			UserName string `json:"user_name"`
+		} `json:"userInfo"`
+		NodePermissions g.ArrayStr `json:"nodePermissions"`
+		Platforms       string     `json:"platforms"`
 	} `json:"data"`
-	NodePermissions g.ArrayStr `json:"nodePermissions"`
-	Platforms       string     `json:"platforms"`
-	UserInfo        struct {
-		Email    string `json:"email"`
-		Id       int    `json:"id"`
-		Mobile   string `json:"mobile"`
-		Password string `json:"password"`
-		RealName string `json:"real_name"`
-		Status   int    `json:"status"`
-		UserIcon string `json:"user_icon"`
-		UserName string `json:"user_name"`
-	} `json:"userInfo"`
 }
 
 type Test struct {
