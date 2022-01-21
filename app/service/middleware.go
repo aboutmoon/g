@@ -14,18 +14,31 @@ type middlewareService struct{}
 
 // 自定义上下文对象
 func (s *middlewareService) Session(r *ghttp.Request) {
-	cookieName := "SESSIONID"
 
 	token := fmt.Sprintf("%v", r.Get("token"))
 
+	var sessionId string
 	if token == "" {
-		sessionId := r.Cookie.Get(cookieName)
-		println(sessionId)
+		sessionId = r.Cookie.Get(r.Server.GetSessionIdName())
 	} else {
-		sessionId := token
+		sessionId = token
+	}
+
+	if sessionId != "" {
+		println("前:" + sessionId)
+		_ = r.Session.SetId(sessionId)
 	}
 	// 执行下一步请求逻辑
 	r.Middleware.Next()
+	println("sessionid:" + r.Session.Id())
+	r.Cookie.SetHttpCookie(&http.Cookie{
+		Name:     r.Server.GetSessionIdName(),
+		Value:    r.Session.Id(),
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode, // 自定义samesite，配合secure一起使用
+		Domain:   r.Server.GetCookieDomain(),
+		Path:     r.Server.GetCookiePath(),
+	})
 }
 
 // 自定义上下文对象

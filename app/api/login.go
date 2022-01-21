@@ -22,7 +22,7 @@ type loginApi struct {
 
 // 获取token
 func (a *loginApi) Token(r *ghttp.Request) {
-	response.JsonExit(r, 1, "success", r.GetSessionId())
+	response.JsonExit(r, 1, "success", r.Session.Id())
 }
 
 //
@@ -96,7 +96,7 @@ func (a *loginApi) Login(r *ghttp.Request) {
 	_ = r.Session.Set(systemKey+"nodePermissions", res.Data.NodePermissions)
 	_ = r.Session.Set(systemKey+"platforms", res.Data.Platforms)
 	_ = r.Session.Set(systemKey+"groups", res.Data.Groups)
-	res.Data.SessionId = r.GetSessionId()
+	res.Data.SessionId = r.Session.Id()
 
 	response.JsonExit(r, 1, "success", res.Data)
 }
