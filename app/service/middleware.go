@@ -3,8 +3,11 @@ package service
 import (
 	"fmt"
 	"g/app/model"
+	"g/library/response"
+	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"net/http"
+	"strings"
 )
 
 // 中间件管理服务
@@ -12,7 +15,7 @@ var Middleware = middlewareService{}
 
 type middlewareService struct{}
 
-// 自定义上下文对象
+// Session中间件
 func (s *middlewareService) Session(r *ghttp.Request) {
 
 	token := fmt.Sprintf("%v", r.Get("token"))
@@ -25,9 +28,10 @@ func (s *middlewareService) Session(r *ghttp.Request) {
 	}
 
 	if sessionId != "" {
-		println("前:" + sessionId)
+		println("set id")
 		_ = r.Session.SetId(sessionId)
 	}
+
 	// 执行下一步请求逻辑
 	r.Middleware.Next()
 	println("sessionid:" + r.Session.Id())
@@ -61,11 +65,45 @@ func (s *middlewareService) Ctx(r *ghttp.Request) {
 
 // 鉴权中间件，只有登录成功之后才能通过
 func (s *middlewareService) Auth(r *ghttp.Request) {
-	if User.IsSignedIn(r.Context()) {
-		r.Middleware.Next()
-	} else {
-		r.Response.WriteStatus(http.StatusForbidden)
+	multiNoCheck := g.ArrayStr{
+		"index/index/index",
+		"index/index/navJson",
+		"index/index/welcome",
+		"index/index/alertSkin",
+		"index/user/baseInfo",
+		"index/login/login",
+		"index/login/logout",
+		"apps/game/test",
+		"index/login/token",
 	}
+
+	// todo: 从配置读取
+	systemKey := "app_gamesystem"
+
+	path := strings.Replace(strings.ToLower(fmt.Sprintf("%v", r.URL.Path)), ".html", "", -1)
+	path = strings.Replace(path, "/api/", "", -1)
+	nodePermission := r.Session.GetStrings(systemKey+"nodePermissions", g.ArrayStr{})
+
+	exist := false
+	for _, v := range multiNoCheck {
+		println(v, path)
+		if v == path {
+			exist = true
+		}
+	}
+
+	if !exist {
+		if len(nodePermission) <= 0 && path != "index/login/login" && path != "login/login" {
+			response.JsonExit(r, 10007, "未登录！")
+		} else {
+			println("haha")
+			r.Response.RedirectTo("/index/login/login")
+		}
+	}
+
+	r.Middleware.Next()
+
+	//r.Response.WriteStatus(http.StatusForbidden)
 }
 
 // 允许接口跨域请求
