@@ -22,19 +22,18 @@ func (s *middlewareService) Session(r *ghttp.Request) {
 
 	var sessionId string
 	if token == "" {
-		sessionId = r.Cookie.Get(r.Server.GetSessionIdName())
+		sessionId = r.Cookie.Get(r.Server.GetSessionIdName(), "")
 	} else {
 		sessionId = token
 	}
 
+	g.Log().Info(sessionId != "")
 	if sessionId != "" {
-		println("set id")
 		_ = r.Session.SetId(sessionId)
 	}
 
 	// 执行下一步请求逻辑
 	r.Middleware.Next()
-	println("sessionid:" + r.Session.Id())
 	r.Cookie.SetHttpCookie(&http.Cookie{
 		Name:     r.Server.GetSessionIdName(),
 		Value:    r.Session.Id(),
@@ -86,7 +85,6 @@ func (s *middlewareService) Auth(r *ghttp.Request) {
 
 	exist := false
 	for _, v := range multiNoCheck {
-		println(v, path)
 		if v == path {
 			exist = true
 		}
@@ -96,7 +94,6 @@ func (s *middlewareService) Auth(r *ghttp.Request) {
 		if len(nodePermission) <= 0 && path != "index/login/login" && path != "login/login" {
 			response.JsonExit(r, 10007, "未登录！")
 		} else {
-			println("haha")
 			r.Response.RedirectTo("/index/login/login")
 		}
 	}
